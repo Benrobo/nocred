@@ -5,7 +5,8 @@ const noCredService = new Nocred();
 
 async function handler(req, res, next) {
   if (req.method === "GET") {
-    await noCredService.getAllUrl(res, req.body);
+    const param = req.query;
+    await noCredService.getUrl(res, param);
   }
 }
 export default CatchErrors(handler);

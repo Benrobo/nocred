@@ -2,7 +2,7 @@ import redisClient from "../config/redis";
 import { calculateExpirationTimestamp, decrypt, encrypt } from "../helper";
 import SendResponse from "../helper/sendResponse";
 import { uuid } from "../helper/index";
-import { createUrlSchema } from "../helper/validate";
+import { createUrlSchema, getUrlSchema } from "../helper/validate";
 
 export default class Nocred extends SendResponse {
   constructor() {
@@ -59,7 +59,35 @@ export default class Nocred extends SendResponse {
     );
   }
 
-  async getAllUrl() {}
+  async getUrl(res, payload) {
+    const { error } = getUrlSchema.validate(payload);
+    if (error) {
+      return this.error(res, "--getUrl/invalid-field", error?.message, 400);
+    }
+
+    const { id } = payload;
+    const urlInfo = await redisClient.get(id);
+
+    if (urlInfo === null) {
+      return this.error(res, "--getUrl/notfound", "url not found", 404);
+    }
+
+    const data = JSON.parse(urlInfo);
+    let sessionId;
+
+    try {
+      sessionId = decrypt(data?.encSession);
+    } catch (e) {
+      console.log(`[DECRYPTION ERROR]: ${e.message}`);
+      this.error(res, "--getUrl/invalid-session", "invalid url", 500);
+      return;
+    }
+
+    this.success(res, "--getUrl/success", "successfully fetched url", 200, {
+      sessionId,
+      userId: data.userId,
+    });
+  }
 
   async deleteUrl() {}
 }

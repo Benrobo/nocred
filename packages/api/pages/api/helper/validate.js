@@ -8,3 +8,7 @@ export const createUrlSchema = Joi.object({
   }),
   sessionId: Joi.string().required(),
 });
+
+export const getUrlSchema = Joi.object({
+  id: Joi.string().required(),
+});
