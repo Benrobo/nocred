@@ -150,6 +150,7 @@ async function renderActiveTabStatus(data) {
   }
   // it not 'elearn.nou.edu' and user isn't loggedIn
   if (data === null || typeof data.cookies === "undefined") {
+    statusMsg("Current tab domain isn't supported!.", "⚠️", "😔", false);
   }
 }
 

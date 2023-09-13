@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-// ! always invoke this method before using it within other parts of the application.
 export default function connectMongodb(mongoUrl) {
   try {
     mongoose.set("strictQuery", false);
