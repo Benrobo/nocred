@@ -1,0 +1,171 @@
+<!-- Use at your own risk -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nocred</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="brand">
+        <img src="./assets/images/logo.png" alt="" />
+        <h1 class="ppSB logo-text">Nocred</h1>
+      </div>
+      <br />
+      <div class="tab-cont">
+        <ul class="nav nav-tabs">
+          <li class="nav-item create-tab">
+            <span class="nav-link active ppSB" href="#">Create</span>
+          </li>
+          <li class="nav-item links-tab">
+            <span class="nav-link ppSB" href="#">Links</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- main content for create method -->
+      <div class="create-main-cont show">
+        <div
+          class="status-cont d-flex flex-row align-items-center justify-content-start"
+        >
+          <div
+            class="left-side d-flex flex-column justify-content-start align-items-start"
+          >
+            <div class="d-flex flex-row">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon invalid"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  d="M256 464c-114.69 0-208-93.31-208-208S141.31 48 256 48s208 93.31 208 208-93.31 208-208 208z"
+                />
+              </svg>
+              <span class="msg ppReg">Current tab domain is invalid</span>
+            </div>
+            <p
+              class="domain ppSB d-flex flex-row align-items-center justify-items-start gap-2"
+            >
+              <span class="emoji mr-5">⚠️</span>
+              <span class="domain-text">elearn.noun.edu</span>
+            </p>
+          </div>
+          <div class="right-side d-flex align-items-end justify-content-end">
+            <span class="emoji">
+              <!-- 😀 -->
+              😥
+            </span>
+          </div>
+        </div>
+
+        <!-- Expiry cont -->
+        <div
+          class="expiry-cont d-flex flex-column align-items-start justify-content-start"
+        >
+          <p class="ppSB">Expires In</p>
+          <div
+            class="expiry-cont d-flex flex-row align-items-start justify-content-start gap-4"
+          >
+            <div
+              class="d-flex flex-row align-items-center justify-content-start gap-2"
+            >
+              <span class="ppReg">1 day </span>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  class="expiry-inp day form-check-input"
+                  name="radio"
+                  id=""
+                />
+              </div>
+            </div>
+            <div
+              class="d-flex flex-row align-items-center justify-content-start gap-2"
+            >
+              <span class="ppReg">1 week </span>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  class="expiry-inp day form-check-input"
+                  name="radio"
+                  id=""
+                />
+              </div>
+            </div>
+            <div
+              class="d-flex flex-row align-items-center justify-content-start gap-2"
+            >
+              <span class="ppReg">Never </span>
+              <div class="form-check">
+                <input
+                  type="radio"
+                  class="expiry-inp day form-check-input"
+                  name="radio"
+                  id=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="create-cont d-flex align-items-start justify-content-start">
+          <button class="create-button btn ppSB py-2">Create Url</button>
+        </div>
+      </div>
+
+      <!-- Links content -->
+      <div class="link-main-cont hide">
+        <div class="heading">
+          <p class="ppSB">Created Access Links</p>
+        </div>
+        <ul class="list-group">
+          <!-- <li
+            class="list-group-item d-flex justify-content-between align-items-start list-group-item-action"
+          >
+            <div class="ms-2 me-auto cont">
+              <a href="nocred.vercel.app/randomid" target="_blank" class="ppSB url">nocred.vercel.app/randomid</a>
+              <p class="ppReg id">linkrandomid</p>
+            </div>
+            <div class="action d-flex flex-column align-items-center justify-content-center">
+              <button type="button" class="btn btn-danger btn-sm ppReg">delete</button>
+            </div>
+          </li>
+          <li
+            class="list-group-item d-flex justify-content-between align-items-start list-group-item-action"
+          >
+            <div class="ms-2 me-auto cont">
+              <a href="nocred.vercel.app/randomid" target="_blank" class="ppSB url">nocred.vercel.app/randomid</a>
+              <p class="ppReg id">linkrandomid</p>
+            </div>
+            <div class="action d-flex flex-column align-items-center justify-content-center">
+              <button type="button" class="btn btn-danger btn-sm ppReg">delete</button>
+            </div>
+          </li> -->
+          <li class="list-group-item error-list-cont">
+            <p class="ppSB error">😔 No Access Link</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./popup.js"></script>
+  </body>
+</html>

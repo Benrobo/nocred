@@ -1,0 +1,269 @@
+body {
+  width: var(--width);
+  height: auto;
+  border-radius: 20px;
+  background: #201f22;
+}
+
+:root {
+  --width: 380px;
+
+  --green-100: #348452;
+  --green-200: #5de09e;
+  --green-300: #60e2a3;
+  --dark-100: #26242b;
+  --dark-200: #444;
+  --red-100: #ff0000;
+}
+
+@font-face {
+  font-family: ppReg;
+  src: url("./assets/fonts/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: ppB;
+  src: url("./assets/fonts/Poppins-Bold.ttf");
+}
+
+@font-face {
+  font-family: ppSB;
+  src: url("./assets/fonts/Poppins-SemiBold.ttf");
+}
+
+.ppReg {
+  font-family: ppReg;
+}
+
+.ppB {
+  font-family: ppB;
+}
+
+.ppSB {
+  font-family: ppSB;
+}
+
+.container {
+  width: var(--width);
+  height: 300px;
+  position: relative;
+  padding: 0px;
+}
+
+/* logo section */
+.container .brand {
+  display: flex;
+  align-items: center;
+  justify-items: flex-start;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-left: 13px;
+  width: 100%;
+  border-bottom-width: 0.4px;
+  border-bottom-style: dashed;
+  border-bottom-color: #444;
+}
+
+.brand img {
+  width: 40px;
+}
+
+.brand h1 {
+  color: var(--green-200);
+  font-size: 18px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.tab-cont {
+  width: 100%;
+  padding: 10px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.tab-cont ul {
+  border-bottom-width: 0.4px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--dark-200);
+}
+
+.tab-cont ul li {
+  font-size: 14px;
+}
+
+.tab-cont ul li span {
+  color: #777;
+  cursor: pointer;
+}
+
+.tab-cont ul li.nav-item > span.active {
+  border-width: 0.4px;
+  border-style: solid;
+  border-top-color: #444;
+  border-right-color: #444;
+  border-left-color: #444;
+  border-bottom-color: transparent;
+  border-radius: 5px 5px 0px 0px;
+  background: #201f22;
+  color: var(--green-200);
+  font-family: ppSB;
+  transition: 0.2s ease-in;
+
+}
+
+.tab-cont ul li span:hover {
+  border-top-color: #444 !important;
+  border-right-color: #444 !important;
+  border-left-color: #444 !important;
+  border-bottom-color: transparent !important;
+  color: var(--green-200);
+  font-family: ppSB;
+  transition: 0.2s ease-in;
+}
+
+/* Status Container */
+.create-main-cont {
+  width: 100%;
+  height: auto;
+  min-height: 150px;
+  padding: 15px;
+  margin-top: 1em;
+}
+
+.create-main-cont.hide {
+  display: none;
+}
+
+.create-main-cont.show {
+  display: block;
+}
+
+.create-main-cont .status-cont {
+  width: auto;
+  border-bottom-width: 0.4px;
+  border-bottom-style: dashed;
+  border-bottom-color: #444;
+  margin-bottom: 2em;
+}
+
+.create-main-cont .status-cont .left-side div .ionicon.valid {
+  fill: var(--green-200) !important;
+  font-size: 12px;
+  width: 13px;
+}
+
+.create-main-cont .status-cont .left-side div .ionicon.invalid {
+  fill: var(--red-100) !important;
+  font-size: 12px;
+  width: 13px;
+}
+
+.create-main-cont .status-cont .left-side div .msg {
+  color: #cccccca3;
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.create-main-cont .status-cont .left-side .domain {
+  color: var(--green-200) !important;
+  margin-top: 10px;
+}
+
+.create-main-cont .status-cont .right-side {
+  width: 30%;
+}
+.create-main-cont .status-cont .right-side .emoji {
+  font-size: 50px;
+}
+
+/* expiry container */
+.create-main-cont .expiry-cont {
+  width: 100%;
+}
+
+.create-main-cont .expiry-cont p {
+  color: #fff;
+}
+
+.create-main-cont .expiry-cont div span {
+  color: #ccc;
+  font-size: 13px;
+}
+
+/* create button */
+.create-cont {
+  width: 100%;
+}
+
+.create-cont .btn {
+  width: var(--width);
+  background: var(--green-200);
+  color: #000;
+}
+
+/* Link Main content */
+
+.link-main-cont {
+  width: 100%;
+  height: auto;
+  min-height: 150px;
+  padding: 15px;
+  margin-top: 1em;
+}
+
+.link-main-cont.hide {
+  display: none;
+}
+
+.link-main-cont.show {
+  display: block;
+}
+
+.link-main-cont .heading p {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.link-main-cont ul li {
+  background: var(--dark-100);
+  color: #ccc;
+  border-width: 0.4px;
+  border-color: #444;
+}
+
+.link-main-cont ul li:hover {
+  background: var(--dark-100);
+  opacity: 0.9;
+}
+
+.link-main-cont ul li div.cont p {
+  margin: 2px;
+}
+.link-main-cont ul li div.cont a {
+  font-size: 13px;
+  color: #dfdfdf;
+  text-decoration: underline;
+}
+
+.link-main-cont ul li div.cont p {
+  font-size: 12px;
+  color: #cccc;
+}
+
+.link-main-cont ul li div.action {
+  height: 50px;
+}
+
+.link-main-cont ul li.error-list-cont {
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.link-main-cont ul li.error-list-cont p {
+  color: #ccc;
+  font-size: 14px;
+  margin: 0px;
+}
