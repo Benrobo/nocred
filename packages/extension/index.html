@@ -33,6 +33,7 @@
 
       <!-- main content for create method -->
       <div class="create-main-cont show">
+        <!-- page status -->
         <div
           class="status-cont d-flex flex-row align-items-center justify-content-start"
         >
@@ -42,27 +43,26 @@
             <div class="d-flex flex-row">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="ionicon invalid"
+                class="ionicon invalid page-status-icon"
                 viewBox="0 0 512 512"
               >
                 <path
                   d="M256 464c-114.69 0-208-93.31-208-208S141.31 48 256 48s208 93.31 208 208-93.31 208-208 208z"
                 />
               </svg>
-              <span class="msg ppReg">Current tab domain is invalid</span>
+              <span class="msg page-status-msg ppReg">
+                <!-- Current tab domain is invalid -->
+              </span>
             </div>
             <p
               class="domain ppSB d-flex flex-row align-items-center justify-items-start gap-2"
             >
-              <span class="emoji mr-5">⚠️</span>
-              <span class="domain-text">elearn.noun.edu</span>
+              <span class="emoji domain-emoji mr-5"></span>
+              <span class="domain-text">elearn.nou.edu.ng</span>
             </p>
           </div>
           <div class="right-side d-flex align-items-end justify-content-end">
-            <span class="emoji">
-              <!-- 😀 -->
-              😥
-            </span>
+            <span class="emoji page-status-emoji"> </span>
           </div>
         </div>
 
@@ -117,7 +117,12 @@
         </div>
         <br />
         <div class="create-cont d-flex align-items-start justify-content-start">
-          <button class="create-button btn ppSB py-2">Create Url</button>
+          <button
+            class="create-button btn btn-secondary ppSB py-2 spinner d-flex flex-column align-items-center justify-items-center"
+          >
+            Create Url
+            <!-- <span class="spinner-border text-dark" role="status"></span> -->
+          </button>
         </div>
       </div>
 

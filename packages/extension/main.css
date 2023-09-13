@@ -6,6 +6,8 @@ body {
 }
 
 :root {
+  /* bootstrap overried */
+
   --width: 380px;
 
   --green-100: #348452;
@@ -41,6 +43,10 @@ body {
 
 .ppSB {
   font-family: ppSB;
+}
+
+.spinner-border {
+  animation-duration: 0.5s;
 }
 
 .container {
@@ -109,7 +115,6 @@ body {
   color: var(--green-200);
   font-family: ppSB;
   transition: 0.2s ease-in;
-
 }
 
 .tab-cont ul li span:hover {
@@ -190,6 +195,10 @@ body {
   color: #ccc;
   font-size: 13px;
 }
+.create-main-cont .expiry-cont.invalid {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 /* create button */
 .create-cont {
@@ -200,6 +209,23 @@ body {
   width: var(--width);
   background: var(--green-200);
   color: #000;
+  transition: all 0.1s ease-in-out;
+}
+
+.create-cont .btn.invalid {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: gray;
+}
+
+.create-cont .btn.loading {
+  cursor: not-allowed;
+  opacity: 0.8;
+  background: var(--green-100);
+}
+
+.create-cont .btn.loading > .spinner-border {
+  color: #fff !important;
 }
 
 /* Link Main content */
