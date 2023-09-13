@@ -33,39 +33,29 @@ export default class Nocred extends SendResponse {
     );
 
     const userId = payload?.userId;
-    const urlId = uuid(8);
-    const cacheKey = `${userId}_${urlId}`; // [userid, urlId]
+    const url_Id = uuid(8);
+    const cacheKey = url_Id; // [userid, urlId]
     const cacheData = {
       userId,
-      urlId,
+      url_Id,
       expiration,
       encSession: encrypt(payload?.sessionId),
     };
 
-    console.log(cacheData, cacheKey);
+    // console.log(cacheData, cacheKey);
 
-    redisClient.set(
-      cacheKey,
-      JSON.stringify(cacheData),
-      {
-        EX: expiration,
-      },
-      (err) => {
-        if (err) {
-          return this.error(
-            res,
-            "--createUrl/redis-server",
-            "failed to save url.",
-            400
-          );
-        }
-        this.success(
-          res,
-          "--createUrl/success",
-          "secure url created successsfully",
-          200
-        );
-      }
+    await redisClient.set(cacheKey, JSON.stringify(cacheData), {
+      EX: new Date(expiration).getTime(),
+    });
+
+    // console.log({ data: await redisClient.get(cacheKey) });
+
+    this.success(
+      res,
+      "--createUrl/success",
+      "secure url created successsfully",
+      200,
+      cacheData
     );
   }
 
