@@ -3,7 +3,7 @@ export const CatchErrors = (handler) => {
     try {
       await handler(req, res);
     } catch (err) {
-      console.log(err);
+      console.log(`[ERROR]: ${err.message}`);
       res.status(500).json({
         errorStatus: true,
         statusCode: 500,

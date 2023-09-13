@@ -1,7 +1,11 @@
 import { CatchErrors } from "../middlewares/error";
-import UserController from "../controller/user";
+import Nocred from "../service/nocred";
 
-const userController = new UserController();
+const noCredService = new Nocred();
 
-const getUsers = (req, res) => userController.getUser(req, res);
-export default CatchErrors(getUsers);
+async function handler(req, res, next) {
+  if (req.method === "GET") {
+    await noCredService.getAllUrl(res, req.body);
+  }
+}
+export default CatchErrors(handler);

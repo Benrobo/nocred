@@ -6,7 +6,7 @@ const createTab = $(".create-tab");
 const linksTab = $(".links-tab");
 const navItems = $all(".nav-item");
 const createTabContents = $(".create-main-cont");
-const linksTabContents = $(".link-main-cont");
+// const linksTabContents = $(".link-main-cont");
 const pageStatusIcon = $(".page-status-icon");
 const pageStatusMsg = $(".page-status-msg");
 const tabDomain = $(".domain-text");
@@ -35,11 +35,11 @@ function setActiveTab(tab) {
   if (createTabContents.classList.contains("hide")) {
     createTabContents.classList.remove("hide");
     createTabContents.classList.add("show");
-    linksTabContents.classList.add("hide");
-    linksTabContents.classList.remove("show");
+    // linksTabContents.classList.add("hide");
+    // linksTabContents.classList.remove("show");
   } else {
-    linksTabContents.classList.remove("hide");
-    linksTabContents.classList.add("show");
+    // linksTabContents.classList.remove("hide");
+    // linksTabContents.classList.add("show");
     createTabContents.classList.add("hide");
     createTabContents.classList.remove("show");
   }

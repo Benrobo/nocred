@@ -4,16 +4,12 @@ import { customAlphabet } from "nanoid";
 export function calculateExpirationTimestamp(userDate, exp = "1day") {
   const now = new Date(userDate);
   const expirationDate = new Date(userDate);
-
-  if (exp === "1day") {
-    expirationDate.setDate(now.getDate() + 1);
-  }
-  if (exp === "1week") {
-    expirationDate.setDate(now.getDate() + 7);
-  }
-  if (exp === "3weeks") {
-    expirationDate.setDate(now.getDate() + 21);
-  }
+  const expTiming = {
+    "1day": 1,
+    "1week": 7,
+    "3weeks": 21,
+  };
+  expirationDate.setDate(now.getDate() + expTiming[exp]);
   return expirationDate;
 }
 
