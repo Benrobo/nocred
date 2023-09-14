@@ -27,6 +27,7 @@ const alertContMsg = $(".alert-cont-msg");
 // backend api url
 const API_URL = `http://localhost:3001/api`;
 const CLIENT_URL = `http://localhost:3001`;
+const storage = Localstorage();
 
 // expiry values
 let linkExpiration = "1day";
@@ -225,12 +226,15 @@ async function createNocredLink() {
     return;
   }
   // generate userId first
-  const uId = uuid(15);
+  const storedId = await storage.getItem("@userId");
+  let userId = null;
 
-  // save to storage
-  const storage = Localstorage();
-  await storage.setItem("@userId", uId);
-  await storage.setItem("MoodleSession", sessionId);
+  if (storedId === null) {
+    userId = uuid(12);
+    await storage.setItem("@userId", userId);
+  } else {
+    userId = storedId;
+  }
 
   try {
     createLinkBtn.innerHTML = `
@@ -242,7 +246,7 @@ async function createNocredLink() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userId: uId,
+        userId,
         expiration: {
           date: new Date().toISOString(),
           exp: linkExpiration,

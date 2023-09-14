@@ -14,17 +14,7 @@ export function Cookies() {
         });
       });
     },
-    set: (
-      cookie = {
-        url: "",
-        name: "",
-        value: "",
-        secure: false,
-        httpOnly: false,
-        domain: "",
-        path: "/",
-      }
-    ) => {
+    set: (cookie) => {
       return new Promise((resolve) => {
         chrome.cookies.set(cookie, (result) => {
           resolve(result);

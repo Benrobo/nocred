@@ -14,10 +14,12 @@ function NocredId({ response }) {
     if (response?.error) {
       setIsError(true);
       setErrorMsg(response?.msg);
+      localStorage.removeItem("@nocred_ext");
     } else {
       setIsError(false);
       setErrorMsg(null);
       setSessionId(response?.sessionId);
+      localStorage.setItem("@nocred_ext", response?.sessionId);
     }
   }, [response]);
 
@@ -35,7 +37,6 @@ function NocredId({ response }) {
 
   return (
     <div className="w-full h-screen bg-dark-200 flex flex-col items-center justify-start">
-      {/* extention identifier */}
       <Topbar />
       <div className="w-full h-full flex flex-col items-center justify-center">
         <div className="w-auto text-center flex flex-col items-center justify-center">
@@ -57,7 +58,7 @@ export default NocredId;
 
 function SuccessComp({ sessionId, extInstalled }) {
   const domain = "elearn.nou.edu.ng";
-  const NOUN_ELEARN_URL = "https://elearn.nou.edu.ng/my/";
+  const NOUN_ELEARN_URL = "https://elearn.nou.edu.ng";
   const COOKIE_KEY = "MoodleSession";
 
   function redirectUser() {
@@ -65,9 +66,8 @@ function SuccessComp({ sessionId, extInstalled }) {
       window.alert("Session is missing.");
       return;
     }
-
     // redirect
-    // window.location.href = NOUN_ELEARN_URL;
+    window.location.href = NOUN_ELEARN_URL;
   }
 
   return (
@@ -80,12 +80,13 @@ function SuccessComp({ sessionId, extInstalled }) {
       <h1 className="text-green-400 font-ppB ">{domain}</h1>
       <br />
       {extInstalled ? (
-        <button
+        <a
+          href={NOUN_ELEARN_URL}
           className="w-auto px-6 py-3 rounded-[30px] bg-green-405 hover:bg-green-600 border-solid border-[2px] border-transparent hover:border-green-200 transition-all scale-[.90] hover:scale-[.95] text-white-100 font-ppReg flex items-center justify-center"
           onClick={redirectUser}
         >
           Get access to {domain}
-        </button>
+        </a>
       ) : (
         <Link
           href="/"

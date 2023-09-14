@@ -1,19 +1,33 @@
 import { Cookies } from "./utils/cookie.js";
 import { Localstorage } from "./utils/storage.js";
 
+const storage = Localstorage();
+
 // run this script in background
 chrome.tabs.onActivated.addListener(function (activeInfo) {
-  // how to fetch tab url using activeInfo.tabid
   chrome.tabs.get(activeInfo.tabId, function (tab) {
-    const { hostname } = new URL(tab.url);
-    const validHostNames = ["elearn.nou.edu.ng"];
-    if (validHostNames.includes(hostname)) {
-      handleCookiesInjecttion(tab.url);
-    }
-
+    if (tab.url?.startsWith("chrome://")) return undefined;
+    // execute content script
+    executeScript(activeInfo?.tabId);
     saveExtId(tab.url);
   });
 });
+
+// listen for event from content.js file
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.sessionId !== null && message.sessionId.length > 0) {
+    const url = "https://elearn.nou.edu.ng";
+    handleCookiesInjecttion(url, message.sessionId);
+  }
+});
+
+// execute content.js file on tab change.
+function executeScript(tabId) {
+  chrome.scripting.executeScript({
+    target: { tabId: tabId },
+    files: ["content.js"],
+  });
+}
 
 // store a key in cookies to detect if user has extention installed or not
 // this function wont execute if user hasn't installed the extention
@@ -29,29 +43,39 @@ async function saveExtId(url) {
   await cookie.set(cookieDetails);
 }
 
-async function handleCookiesInjecttion(url) {
+// ! Remember to work on removing the cookie first before invoking handleCookieInjection
+
+async function handleCookiesInjecttion(url, sessionId) {
   const cookies = Cookies();
-  const storage = Localstorage();
   const key = "MoodleSession";
   const nounSessionCookie = await cookies.get(key, url);
+  const domain = nounSessionCookie?.domain.replace(/^\./, "");
 
-  // check storage if userId exists, if it does this means user has generated one
-  // this would prevent modifying loggedIn user sesssion with another user session (if the user hasn't generate a nocred url)
-  const data = await storage.getItem(key);
-  console.log(data, nounSessionCookie.domain);
-  if (data !== null) {
-    // modify cookie
-    // await cookies.remove(key, url);
+  //   check if cookie has been saved previously.
+  const hasCookieSaved = await storage.getItem(sessionId);
+
+  if (hasCookieSaved !== null) {
+    await storage.removeItem(sessionId);
+    console.log(`[COOKIE CLEARED]:${sessionId}`);
+    return;
+  }
+
+  console.log(nounSessionCookie, url, domain);
+
+  await cookies.remove(key, url);
+
+  setTimeout(async () => {
     await cookies.set({
       url,
       name: key,
-      value: data,
-      domain: nounSessionCookie.domain.startWith(".")
-        ? nounSessionCookie.domain.slice(1)
-        : nounSessionCookie.domain,
+      value: sessionId,
+      domain,
       secure: true,
+      sameSite: "unspecified",
     });
-    await storage.removeItem(key);
     console.log("NOUN COOKIE MODIFIED");
-  }
+
+    await storage.setItem(sessionId, sessionId);
+    console.log(`[NEW COOKIE SAVED]:${sessionId}`);
+  }, 3000);
 }
