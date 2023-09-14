@@ -3,7 +3,7 @@ import { Poppins, DM_Sans } from "@next/font/google";
 export const ppReg = Poppins({
   subsets: ["latin"],
   variable: "--font-ppReg",
-  weight: ["500"],
+  weight: ["400"],
 });
 
 // bold poppins

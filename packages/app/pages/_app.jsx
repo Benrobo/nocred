@@ -1,5 +1,5 @@
-import "@/styles/globals.css";
 import { ppB, ppEB, ppReg } from "../config/font";
+import "../styles/globals.css";
 
 export default function App({ Component, pageProps }) {
   return (

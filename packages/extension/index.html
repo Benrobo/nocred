@@ -19,7 +19,12 @@
         <img src="./assets/images/logo.png" alt="" />
         <h1 class="ppSB logo-text">Nocred</h1>
       </div>
-      <br />
+      <!-- error alert -->
+      <div class="p-2">
+        <div class="alert-cont hide">
+          <p class="ppReg alert-cont-msg">Some message here</p>
+        </div>
+      </div>
       <div class="tab-cont">
         <ul class="nav nav-tabs">
           <li class="nav-item create-tab">
@@ -68,7 +73,7 @@
 
         <!-- Expiry cont -->
         <div
-          class="expiry-cont d-flex flex-column align-items-start justify-content-start"
+          class="expiry-cont show flex-column align-items-start justify-content-start"
         >
           <p class="ppSB">Expires In</p>
           <div
@@ -83,7 +88,9 @@
                   type="radio"
                   class="expiry-inp day form-check-input"
                   name="radio"
+                  value="1day"
                   id=""
+                  checked
                 />
               </div>
             </div>
@@ -96,6 +103,7 @@
                   type="radio"
                   class="expiry-inp day form-check-input"
                   name="radio"
+                  value="1week"
                   id=""
                 />
               </div>
@@ -110,19 +118,40 @@
                   class="expiry-inp day form-check-input"
                   name="radio"
                   id=""
+                  value="3weeks"
                 />
               </div>
             </div>
           </div>
         </div>
         <br />
-        <div class="create-cont d-flex align-items-start justify-content-start">
+        <div class="create-cont show align-items-start justify-content-start">
           <button
             class="create-button btn btn-secondary ppSB py-2 spinner d-flex flex-column align-items-center justify-items-center"
           >
-            Create Url
+            Create URL
             <!-- <span class="spinner-border text-dark" role="status"></span> -->
           </button>
+        </div>
+
+        <!-- Copy Url Button -->
+        <div
+          class="url-cont nocred-url-cont hide flex-column align-items-start justify-content-start"
+        >
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control url-inp nocred-url-inp"
+              placeholder="https://nocred.vercel.app/454ff321"
+            />
+            <button
+              class="btn btn-outline-secondary font-ppB nocred-copy-btn"
+              type="button"
+              id="button-addon2"
+            >
+              Copy
+            </button>
+          </div>
         </div>
       </div>
 
@@ -171,6 +200,6 @@
       integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
       crossorigin="anonymous"
     ></script>
-    <script src="./popup.js"></script>
+    <script type="module" src="./popup.js"></script>
   </body>
 </html>

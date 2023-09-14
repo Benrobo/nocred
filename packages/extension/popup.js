@@ -1,3 +1,5 @@
+import { Localstorage } from "./utils/storage.js";
+
 const $ = (elem) => document.querySelector(elem);
 const $all = (elem) => document.querySelectorAll(elem);
 const len = (arr) => arr.length;
@@ -13,17 +15,49 @@ const tabDomain = $(".domain-text");
 const domainEmoji = $(".domain-emoji");
 const pageStatusEmoji = $(".page-status-emoji");
 const expiryCont = $(".expiry-cont");
+const createCont = $(".create-cont");
 const createLinkBtn = $(".create-button");
+const expiryRadioInp = $all(".expiry-inp");
+const nocredUrlCont = $(".nocred-url-cont");
+const nocredUrlInp = $(".nocred-url-inp");
+const nocredCopyBtn = $(".nocred-copy-btn");
+const alertCont = $(".alert-cont");
+const alertContMsg = $(".alert-cont-msg");
+
+// backend api url
+const API_URL = `http://localhost:3001/api`;
+const CLIENT_URL = `http://localhost:3001`;
+
+// expiry values
+let linkExpiration = "1day";
+let sessionId = null;
+let nocredUrl = null;
 
 window.addEventListener("load", async () => {
   const tabInfo = await getActiveTabInfo();
   renderActiveTabStatus(tabInfo.data);
-  // console.log(tabInfo);
 });
 
-// handle tab switching
-navItems.forEach((tab) => {
-  tab.onclick = () => setActiveTab(tab);
+// handle tab switching (would work on this later)
+// navItems.forEach((tab) => {
+//   tab.onclick = () => setActiveTab(tab);
+// });
+
+// handle creating link
+createLinkBtn.onclick = () => createNocredLink();
+
+// copy link to clipboard
+nocredCopyBtn.onclick = async () => {
+  const link = nocredUrlInp.value;
+  await navigator.clipboard.writeText(link);
+  renderAlertMessage("Link copied to clipboard", true);
+};
+
+// handle expiration
+expiryRadioInp.forEach((inp) => {
+  inp.addEventListener("change", (e) => {
+    linkExpiration = e.target.value;
+  });
 });
 
 function setActiveTab(tab) {
@@ -91,7 +125,6 @@ function getActiveTabInfo() {
 }
 
 // render active tab status
-
 function statusMsg(msg, dEmoji, pEmoji, success) {
   if (success === false) {
     pageStatusIcon.classList.add("invalid");
@@ -138,20 +171,120 @@ async function renderActiveTabStatus(data) {
     const cookies = data?.cookies;
     const cookiesLen = len(data?.cookies);
     const moduleIdExists = cookies.find((d) => d.name === "MOODLEID1_");
+    const sessionIdExists = cookies.find((d) => d.name === "MoodleSession");
 
-    console.log(cookies, cookiesLen, moduleIdExists);
+    // console.log(cookies, cookiesLen, moduleIdExists);
 
-    if (cookiesLen.length === 1 || typeof moduleIdExists === "undefined") {
+    if (
+      cookiesLen.length === 1 ||
+      typeof moduleIdExists === "undefined" ||
+      typeof sessionIdExists === "undefined"
+    ) {
       statusMsg("You must be logged in to continue.", "⚠️", "🔐", false);
       return;
     }
 
+    sessionId = sessionIdExists?.value;
     statusMsg("You're all set.", "✅", "🎉", true);
   }
   // it not 'elearn.nou.edu' and user isn't loggedIn
   if (data === null || typeof data.cookies === "undefined") {
     statusMsg("Current tab domain isn't supported!.", "⚠️", "😔", false);
   }
+}
+
+// render alert message
+function renderAlertMessage(msg, success) {
+  if (success) {
+    alertCont.classList.remove("hide", "error");
+    alertCont.classList.add("show", "success");
+    alertContMsg.innerHTML = msg;
+  } else {
+    alertCont.classList.remove("hide", "success");
+    alertCont.classList.add("error", "show");
+    alertContMsg.innerHTML = msg;
+  }
+}
+
+// interval to remove alert
+setInterval(() => {
+  if (alertCont.classList.contains("show")) {
+    setTimeout(() => {
+      alertCont.classList.remove("show", "success", "error");
+      alertCont.classList.add("hide");
+      console.log("ALERT REMOVED FROM DOM.");
+    }, 5000);
+  }
+}, 2000);
+
+// handle creating of link
+async function createNocredLink() {
+  // VALIDATE
+  if (sessionId === null) {
+    renderAlertMessage("Not logged in", false);
+    return;
+  }
+  // generate userId first
+  const uId = uuid(15);
+
+  // save to storage
+  const storage = Localstorage();
+  await storage.setItem("@userId", uId);
+
+  try {
+    createLinkBtn.innerHTML = `
+    <span class="spinner-border text-dark" role="status"></span>
+    `;
+    const res = await fetch(`${API_URL}/url/create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: uId,
+        expiration: {
+          date: new Date().toISOString(),
+          exp: linkExpiration,
+        },
+        sessionId,
+      }),
+    });
+    const data = await res.json();
+
+    if (data?.errorStatus) {
+      renderAlertMessage(data.message, false);
+    } else {
+      renderAlertMessage(data.message, true);
+      nocredUrl = `${CLIENT_URL}/${data?.data?.url_Id}`;
+
+      // hide the component necessary for creating link
+      expiryCont.classList.remove("show");
+      expiryCont.classList.add("hide");
+      createCont.classList.remove("show");
+      createCont.classList.add("hide");
+
+      // show the copy link component
+      nocredUrlCont.classList.remove("hide");
+      nocredUrlCont.classList.add("show");
+      nocredUrlInp.value = nocredUrl;
+    }
+
+    createLinkBtn.innerHTML = `Create URL`;
+  } catch (e) {
+    console.log(`ERROR creating link: ${e.message}`);
+    createLinkBtn.innerHTML = `Create URL`;
+    renderAlertMessage(e.message, false);
+  }
+}
+
+function uuid(len = 10) {
+  let id = "";
+  let char = "1234567890abcdefghi".split("");
+  for (let i = 0; i <= len; i++) {
+    const rand = Math.floor(Math.random() * char.length);
+    id += char[rand];
+  }
+  return id;
 }
 
 /**

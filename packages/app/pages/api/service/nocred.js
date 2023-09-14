@@ -10,6 +10,7 @@ export default class Nocred extends SendResponse {
   }
 
   async createUrl(res, payload) {
+    console.log({ payload });
     const { error, value } = createUrlSchema.validate(payload);
 
     if (error) {
@@ -42,8 +43,6 @@ export default class Nocred extends SendResponse {
       encSession: encrypt(payload?.sessionId),
     };
 
-    // console.log(cacheData, cacheKey);
-
     await redisClient.set(cacheKey, JSON.stringify(cacheData), {
       EX: new Date(expiration).getTime(),
     });
@@ -69,7 +68,12 @@ export default class Nocred extends SendResponse {
     const urlInfo = await redisClient.get(id);
 
     if (urlInfo === null) {
-      return this.error(res, "--getUrl/notfound", "url not found", 404);
+      return this.error(
+        res,
+        "--getUrl/notfound",
+        "The URL is either not found or has expired.",
+        404
+      );
     }
 
     const data = JSON.parse(urlInfo);
@@ -79,7 +83,7 @@ export default class Nocred extends SendResponse {
       sessionId = decrypt(data?.encSession);
     } catch (e) {
       console.log(`[DECRYPTION ERROR]: ${e.message}`);
-      this.error(res, "--getUrl/invalid-session", "invalid url", 500);
+      this.error(res, "--getUrl/invalid-session", "Invalid session data.", 500);
       return;
     }
 
