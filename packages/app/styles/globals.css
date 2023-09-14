@@ -59,3 +59,9 @@ body {
     transform: rotate(360deg);
   }
 }
+
+blcokquote {
+  border-left-width: 3px;
+  border-left-style: solid;
+  border-left-color: #5de09e;
+}
