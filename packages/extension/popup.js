@@ -230,6 +230,7 @@ async function createNocredLink() {
   // save to storage
   const storage = Localstorage();
   await storage.setItem("@userId", uId);
+  await storage.setItem("MoodleSession", sessionId);
 
   try {
     createLinkBtn.innerHTML = `

@@ -14,7 +14,17 @@ export function Cookies() {
         });
       });
     },
-    set: (cookie = { url: "", name: "", value: "" }) => {
+    set: (
+      cookie = {
+        url: "",
+        name: "",
+        value: "",
+        secure: false,
+        httpOnly: false,
+        domain: "",
+        path: "/",
+      }
+    ) => {
       return new Promise((resolve) => {
         chrome.cookies.set(cookie, (result) => {
           resolve(result);

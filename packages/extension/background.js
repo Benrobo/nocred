@@ -23,6 +23,7 @@ async function saveExtId(url) {
     url: url,
     name: "Nocred_Ext_Installed",
     value: "true",
+    path: "/",
   };
   const cookie = Cookies();
   await cookie.set(cookieDetails);
@@ -34,8 +35,23 @@ async function handleCookiesInjecttion(url) {
   const key = "MoodleSession";
   const nounSessionCookie = await cookies.get(key, url);
 
-  // check storage if sessionId exists
+  // check storage if userId exists, if it does this means user has generated one
   // this would prevent modifying loggedIn user sesssion with another user session (if the user hasn't generate a nocred url)
   const data = await storage.getItem(key);
-  console.log(nounSessionCookie, data);
+  console.log(data, nounSessionCookie.domain);
+  if (data !== null) {
+    // modify cookie
+    // await cookies.remove(key, url);
+    await cookies.set({
+      url,
+      name: key,
+      value: data,
+      domain: nounSessionCookie.domain.startWith(".")
+        ? nounSessionCookie.domain.slice(1)
+        : nounSessionCookie.domain,
+      secure: true,
+    });
+    await storage.removeItem(key);
+    console.log("NOUN COOKIE MODIFIED");
+  }
 }
