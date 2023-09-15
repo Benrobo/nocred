@@ -20,6 +20,14 @@ function NocredId({ response }) {
       setErrorMsg(null);
       setSessionId(response?.sessionId);
       localStorage.setItem("@nocred_ext", response?.sessionId);
+
+      // reload
+      const reloaded =
+        localStorage.getItem("@reloaded") === null ? false : true;
+      if (!reloaded) {
+        window.location.reload();
+        localStorage.setItem("@reloaded", true);
+      }
     }
   }, [response]);
 
@@ -67,6 +75,7 @@ function SuccessComp({ sessionId, extInstalled }) {
       return;
     }
     // redirect
+    localStorage.removeItem("@reloaded");
     window.location.href = NOUN_ELEARN_URL;
   }
 
