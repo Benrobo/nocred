@@ -14,14 +14,6 @@ redisClient
     console.log(`REDIS CONNECTION ERROR: ${err.message}`);
   });
 
-// const redisClient = new Redis(process.env.UPSTASH_REDIS);
-
-// redisClient.on("connect", () => {
-//   console.log("Connected to Redis");
-// });
-
-// redisClient.on("error", (err) => console.log("Redis Client Error", err));
-
 export default redisClient;
 
 export const connectRedis = async () => {
