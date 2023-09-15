@@ -13,7 +13,7 @@ function Footer() {
               href="https://github.com/benrobo"
               className="font-ppB underline ml-2"
             >
-              Benrobo
+              benrobo
             </a>
           </span>
         </div>
