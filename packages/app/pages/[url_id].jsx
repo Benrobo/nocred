@@ -160,8 +160,6 @@ export async function getServerSideProps({ query }) {
     } else {
       // decrypt
       const decoded = decrypt(resp?.data?.encSession);
-
-      console.log({enc: resp?.data})
       response["error"] = false;
       response["sessionId"] = decoded;
     }
