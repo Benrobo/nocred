@@ -29,7 +29,7 @@ const alertContMsg = $(".alert-cont-msg");
 // const CLIENT_URL = `http://localhost:3000`;
 
 const API_URL = `https://nocred.vercel.app/api`;
-const CLIENT_URL = `https://nocred.vercel.app/`;
+const CLIENT_URL = `https://nocred.vercel.app`;
 
 const storage = Localstorage();
 
