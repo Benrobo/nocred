@@ -11,6 +11,8 @@ function NocredId({ response }) {
   const [sessionId, setSessionId] = useState(null);
   const [extentionInstalled, setExtensionInstalled] = useState(false);
 
+  // console.log(response);
+
   useEffect(() => {
     if (response?.error) {
       setIsError(true);
