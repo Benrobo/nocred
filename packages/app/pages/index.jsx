@@ -17,6 +17,7 @@ export default function Home() {
             Securely Grant other students access to your noun{" "}
             <a
               href="https://elearn.nou.edu.ng"
+              target="_blank"
               className="text-white-100 underline"
             >
               elearn
