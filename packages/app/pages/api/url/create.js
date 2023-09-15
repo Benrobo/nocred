@@ -2,7 +2,9 @@ import { CatchErrors } from "../middlewares/error";
 import Nocred from "../service/nocred";
 
 export const config = {
-  runtime: "edge",
+  api: {
+    bodyParser: false,
+  },
 };
 
 const noCredService = new Nocred();
