@@ -4,7 +4,7 @@ import Head from "next/head";
 
 export default function Home() {
   const nocredExtRelease =
-    "https://github.com/Benrobo/nocred/archive/refs/tags/nocred-extension-v1.0.zip";
+    "https://github.com/Benrobo/nocred/releases/tag/latest";
 
   return (
     <>
