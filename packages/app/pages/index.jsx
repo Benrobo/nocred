@@ -5,7 +5,7 @@ export default function Home() {
   const nocredExtRelease = "https://github.com/benrobo/nocred";
 
   return (
-    <div className="w-full h-screen bg-dark-200 flex flex-col items-center justify-center overflow-y-scroll hideScrollBar">
+    <div className="w-full h-screen bg-dark-200 flex flex-col items-center justify-center overflow-y-scroll hideScrollBar scroll-smooth">
       <div className="w-full h-full md:max-w-[800px] px-5 ">
         <Topbar />
         <br />
@@ -94,7 +94,11 @@ export default function Home() {
           </div>
           <br />
           <br />
-          <h1 className="text-white-100 font-ppB text-2xl md:text-4xl ">
+
+          <h1
+            id="getstarted"
+            className="text-white-100 font-ppB text-2xl md:text-4xl "
+          >
             Get Started
           </h1>
           <br />

@@ -97,13 +97,13 @@ function SuccessComp({ sessionId, extInstalled }) {
           Get access to {domain}
         </a>
       ) : (
-        <Link
-          href="/"
+        <a
+          href={new URL(env.api).origin + "#getstarted"}
+          target="_blank"
           className="w-auto px-7 py-3 rounded-[30px] bg-green-600 hover:bg-green-600 border-solid border-[2px] border-green-200 transition-all scale-[.90] hover:scale-[.95] text-white-100 font-ppReg flex items-center justify-center"
-          onClick={redirectUser}
         >
           🧩 Add Extention to Chrome
-        </Link>
+        </a>
       )}
       <p className="text-white-300 mt-2 font-ppReg text-[13px] ">
         🔐 Nocred encrypt session using{" "}
