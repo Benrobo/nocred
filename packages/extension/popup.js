@@ -25,8 +25,9 @@ const alertCont = $(".alert-cont");
 const alertContMsg = $(".alert-cont-msg");
 
 // backend api url
-const API_URL = `http://localhost:3001/api`;
-const CLIENT_URL = `http://localhost:3001`;
+// const API_URL = `http://localhost:3001/api`;
+const API_URL = `https://nocred.vercel.app/api`;
+const CLIENT_URL = `https://nocred.vercel.app/`;
 const storage = Localstorage();
 
 // expiry values
