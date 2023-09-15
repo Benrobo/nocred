@@ -3,6 +3,7 @@ import env from "@/config/env";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { decrypt } from "./api/helper";
 
 function NocredId({ response }) {
   const [isError, setIsError] = useState(false);
@@ -157,8 +158,12 @@ export async function getServerSideProps({ query }) {
       response["error"] = true;
       response["msg"] = resp?.message;
     } else {
+      // decrypt
+      const decoded = decrypt(resp?.data?.encSession);
+
+      console.log({enc: resp?.data})
       response["error"] = false;
-      response["sessionId"] = resp?.data?.sessionId;
+      response["sessionId"] = decoded;
     }
   } catch (e) {
     console.log(e);

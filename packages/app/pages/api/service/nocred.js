@@ -72,18 +72,9 @@ export default class Nocred extends SendResponse {
     }
 
     const data = urlInfo;
-    let sessionId;
-
-    try {
-      sessionId = decrypt(data?.encSession);
-    } catch (e) {
-      console.log(`[DECRYPTION ERROR]: ${e.message}`);
-      this.error(res, "--getUrl/invalid-session", "Invalid session data.", 500);
-      return;
-    }
 
     this.success(res, "--getUrl/success", "successfully fetched url", 200, {
-      sessionId,
+      encSession: data?.encSession,
       userId: data.userId,
     });
   }
