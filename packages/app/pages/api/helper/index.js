@@ -4,8 +4,8 @@ import { customAlphabet } from "nanoid";
 export function returnTTL(exp) {
   const expTiming = {
     "1day": 24 * 60 * 60, //seconds
-    "1week": 7 * 86400, // seconds
-    "3weeks": 21 * 86400, //seconds
+    "30min": 3 * 60, // seconds
+    "1hr": 60 * 60, //seconds
   };
   return expTiming[exp];
 }

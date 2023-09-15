@@ -34,7 +34,7 @@ const CLIENT_URL = `https://nocred.vercel.app`;
 const storage = Localstorage();
 
 // expiry values
-let linkExpiration = "1day";
+let linkExpiration = "30min";
 let sessionId = null;
 let nocredUrl = null;
 

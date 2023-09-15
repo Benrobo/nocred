@@ -18,7 +18,7 @@ export default class Nocred extends SendResponse {
     }
 
     // check if expiry is valid
-    const validExp = ["1day", "1week", "3weeks"];
+    const validExp = ["30min", "1hr", "1day"];
     if (!validExp.includes(payload?.expiration?.exp)) {
       return this.error(
         res,
