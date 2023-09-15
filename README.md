@@ -24,7 +24,7 @@ As a precaution, I would recommend generating a nocred URL with a 1-day expirati
 
 Using this extension is as easy as possible. All you have to do is follow the instruction below:
 
-**Download Extension**: Nocred extension can be downloaded from this [github release](https://github.com/Benrobo/nocred/archive/refs/tags/nocred-extension-v1.0.zip). After downloading, Open your default PC browser, for me, it's Brave. Navigate to the puzzle icon at the top right corner of the browser, click on that icon, and select **Managed Extensions** as seen in the picture below.
+**Download Extension**: Nocred extension can be downloaded from this [github release](https://github.com/Benrobo/nocred/releases/tag/latest). After downloading, Open your default PC browser, for me, it's Brave. Navigate to the puzzle icon at the top right corner of the browser, click on that icon, and select **Managed Extensions** as seen in the picture below.
 
 ![Image](https://raw.githubusercontent.com/Benrobo/nocred/main/md-assets/1.png)
 
