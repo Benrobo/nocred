@@ -3,7 +3,7 @@ import Nocred from "../service/nocred";
 
 export const config = {
   api: {
-    bodyParser: false,
+    bodyParser: true,
   },
 };
 

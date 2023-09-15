@@ -1,5 +1,5 @@
 import redisClient from "../config/redis";
-import { calculateExpirationTimestamp, decrypt, encrypt } from "../helper";
+import { decrypt, encrypt, returnTTL } from "../helper";
 import SendResponse from "../helper/sendResponse";
 import { uuid } from "../helper/index";
 import { createUrlSchema, getUrlSchema } from "../helper/validate";
@@ -28,14 +28,10 @@ export default class Nocred extends SendResponse {
       );
     }
 
-    const expiration = calculateExpirationTimestamp(
-      payload?.expiration?.date,
-      payload?.expiration?.exp
-    );
-
     const userId = payload?.userId;
     const url_Id = uuid(8);
     const cacheKey = url_Id; // [userid, urlId]
+    const expiration = returnTTL(payload?.expiration?.exp);
     const cacheData = {
       userId,
       url_Id,
@@ -43,11 +39,8 @@ export default class Nocred extends SendResponse {
       encSession: encrypt(payload?.sessionId),
     };
 
-    await redisClient.set(cacheKey, JSON.stringify(cacheData), {
-      EX: new Date(expiration).getTime(),
-    });
-
-    // console.log({ data: await redisClient.get(cacheKey) });
+    await redisClient.set(cacheKey, JSON.stringify(cacheData));
+    await redisClient.expire(cacheKey, expiration);
 
     this.success(
       res,
@@ -67,6 +60,8 @@ export default class Nocred extends SendResponse {
     const { id } = payload;
     const urlInfo = await redisClient.get(id);
 
+    console.log({ id, urlInfo });
+
     if (urlInfo === null) {
       return this.error(
         res,
@@ -76,7 +71,7 @@ export default class Nocred extends SendResponse {
       );
     }
 
-    const data = JSON.parse(urlInfo);
+    const data = urlInfo;
     let sessionId;
 
     try {

@@ -1,16 +1,13 @@
 import crypto from "crypto";
 import { customAlphabet } from "nanoid";
 
-export function calculateExpirationTimestamp(userDate, exp = "1day") {
-  const now = new Date(userDate);
-  const expirationDate = new Date(userDate);
+export function returnTTL(exp) {
   const expTiming = {
-    "1day": 1,
-    "1week": 7,
-    "3weeks": 21,
+    "1day": 24 * 60 * 60, //seconds
+    "1week": 7 * 86400, // seconds
+    "3weeks": 21 * 86400, //seconds
   };
-  expirationDate.setDate(now.getDate() + expTiming[exp]);
-  return expirationDate;
+  return expTiming[exp];
 }
 
 export function encrypt(data) {

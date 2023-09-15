@@ -25,9 +25,10 @@ const alertCont = $(".alert-cont");
 const alertContMsg = $(".alert-cont-msg");
 
 // backend api url
-// const API_URL = `http://localhost:3001/api`;
-const API_URL = `https://nocred.vercel.app/api`;
-const CLIENT_URL = `https://nocred.vercel.app/`;
+const API_URL = `http://localhost:3000/api`;
+// const API_URL = `https://nocred.vercel.app/api`;
+// const CLIENT_URL = `https://nocred.vercel.app/`;
+const CLIENT_URL = `http://localhost:3000`;
 const storage = Localstorage();
 
 // expiry values
@@ -241,6 +242,7 @@ async function createNocredLink() {
     createLinkBtn.innerHTML = `
     <span class="spinner-border text-dark" role="status"></span>
     `;
+    createLinkBtn.setAttribute("disabled", true);
     const res = await fetch(`${API_URL}/url/create`, {
       method: "POST",
       headers: {
@@ -256,6 +258,7 @@ async function createNocredLink() {
       }),
     });
     const data = await res.json();
+    createLinkBtn.removeAttribute("disabled");
 
     if (data?.errorStatus) {
       renderAlertMessage(data.message, false);
@@ -277,6 +280,7 @@ async function createNocredLink() {
 
     createLinkBtn.innerHTML = `Create URL`;
   } catch (e) {
+    createLinkBtn.removeAttribute("disabled");
     console.log(`ERROR creating link: ${e.message}`);
     createLinkBtn.innerHTML = `Create URL`;
     renderAlertMessage(e.message, false);

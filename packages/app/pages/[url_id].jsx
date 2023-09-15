@@ -161,6 +161,7 @@ export async function getServerSideProps({ query }) {
       response["sessionId"] = resp?.data?.sessionId;
     }
   } catch (e) {
+    console.log(e);
     response["error"] = true;
     response["msg"] = e?.message;
   }
