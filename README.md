@@ -14,11 +14,11 @@ Recognizing this problem, I took the initiative to create a secure application. 
 
 ## Is This Secure? 🧐
 
-To some extent, **Yes**. The generated link has an expiration period, which can be set to 1 day, 1 week, or 3 weeks, as indicated in the extension.
+To some extent, **Yes**. The generated link has an expiration period, which can be set to 30min, 1hr, or 1day, as indicated in the extension.
 
 Additionally, the session data collected from the logged-in user is securely encrypted using the [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) encryption algorithm and a secret key stored on the server before storage. However, it's important to note that even with these security measures, there is still a potential risk. If you grant access to your portal and someone copies your logged-in session ID, they could potentially use it later, especially if they have some technical knowledge.
 
-As a precaution, I would recommend generating a nocred URL with a 1-day expiration to minimize the risk of the link being used beyond the intended timeframe. **Use at your own risk**.
+As a precaution, I would recommend generating a nocred URL with a 30min expiration to minimize the risk of the link being used beyond the intended timeframe. **Use at your own risk**.
 
 ## Get Started
 
