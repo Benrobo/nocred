@@ -67,8 +67,8 @@ export default function Home() {
             <div className="w-full mt-2 flex flex-col items-start justify-start gap-3">
               <p className="text-white-200 text-[14px] font-ppReg">
                 To some extent, <span className="text-white-100">Yes</span>. The
-                generated link has an expiration period, which can be set to 1
-                day, 1 week, or 3 weeks, as indicated in the extension.
+                generated link has an expiration period, which can be set to
+                30min, 1hr, or 1day, as indicated in the extension.
               </p>
               <p className="text-white-200 text-[14px] font-ppReg">
                 Additionally, the session data collected from the logged-in user
@@ -89,7 +89,7 @@ export default function Home() {
               </p>
               <p className="text-white-200 text-[14px] font-ppReg">
                 As a precaution, I would recommend generating a nocred URL with
-                a 1-day expiration to minimize the risk of the link being used
+                a 30min expiration to minimize the risk of the link being used
                 beyond the intended timeframe.{" "}
                 <span className="text-white-100 font-ppB">
                   Use at your own risk
