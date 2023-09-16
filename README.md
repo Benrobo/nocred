@@ -2,7 +2,7 @@
 
 ##### Securely Grant other students access to your noun elearn portal without sharing credentials.
 
-# First and foremost
+First and foremost
 
 ## Why I built this? 🤔
 
