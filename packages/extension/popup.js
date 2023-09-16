@@ -153,8 +153,6 @@ function statusMsg(msg, dEmoji, pEmoji, success) {
 }
 
 async function renderActiveTabStatus(data) {
-  // console.log({ data });
-
   // If the active tab is not 'elearn.nou.edu'
   if (
     data === null ||
@@ -298,25 +296,3 @@ function uuid(len = 10) {
   }
   return id;
 }
-
-/**
- * 
-  {
-    "url": "https://elearn.nou.edu.ng/my/",
-    "icon": "https://elearn.nou.edu.ng/pluginfile.php/1/theme_catawesome/favicon/1693817408/favicon%281%29.ico",
-    "tabId": 1474343042,
-    "cookies": [
-        {
-            "name": "MoodleSession",
-            "path": "/",
-            "value": "74a6096d1dd1e7f70ce8c915e6995246"
-        },
-        {
-            "name": "MOODLEID1_",
-            "path": "/",
-            "value": "%2584%25A1%2513%25A4q%2516.%25A7%25C3%25C7%25B3%2591"
-        }
-    ],
-    "domain": "elearn.nou.edu.ng"
-}
- */
